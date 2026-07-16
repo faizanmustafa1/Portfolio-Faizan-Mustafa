@@ -51,11 +51,11 @@ export function SkillsSection() {
 
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 xl:grid-cols-5">
                     {category.skills.map((skill, skillIndex) => {
-                      const { color } = getSkillIcon(skill.name);
+                      const { color } = getSkillIcon(skill);
 
                       return (
                         <motion.div
-                          key={skill.name}
+                          key={skill}
                           initial={{ opacity: 0, y: 16 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
@@ -77,11 +77,11 @@ export function SkillsSection() {
                             className="relative flex h-14 w-14 items-center justify-center rounded-xl border border-border/80 bg-background/60 transition-all duration-300 group-hover:scale-110 group-hover:border-primary/30 sm:h-16 sm:w-16"
                             style={{ boxShadow: `0 0 24px ${color}22` }}
                           >
-                            <SkillIcon name={skill.name} />
+                            <SkillIcon name={skill} />
                           </div>
 
                           <span className="relative text-center text-sm font-medium text-secondary-foreground transition-colors group-hover:text-foreground sm:text-base">
-                            {skill.name}
+                            {skill}
                           </span>
                         </motion.div>
                       );

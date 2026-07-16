@@ -55,7 +55,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border pt-8 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground" suppressHydrationWarning>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>

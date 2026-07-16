@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { FadeUp, SectionDivider, SectionHeader } from "@/components/ui/motion";
+import { getContactErrorMessage, submitContactForm } from "@/lib/contact-form";
 import { siteConfig } from "@/lib/data/site-data";
 import { cn } from "@/lib/utils";
 
@@ -83,29 +84,11 @@ export function ContactSection() {
     };
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      let data: { error?: string; success?: boolean } = {};
-      try {
-        data = await response.json();
-      } catch {
-        throw new Error("Server error. Please try again later.");
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to send message.");
-      }
-
+      await submitContactForm(payload);
       setSubmitted(true);
       (e.target as HTMLFormElement).reset();
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Something went wrong. Please try again."
-      );
+      setError(getContactErrorMessage(err));
     } finally {
       setLoading(false);
     }

@@ -69,10 +69,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
-  icons: {
-    icon: "/assets/favicon.ico.png",
-    apple: "/assets/favicon.ico.png",
-  },
 };
 
 const jsonLd = {
@@ -110,14 +106,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
